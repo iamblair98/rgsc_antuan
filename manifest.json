@@ -2,7 +2,7 @@
   "name": "사내 임직원 비상연락망",
   "short_name": "비상연락망",
   "description": "사내 임직원 비상연락처 앱",
-  "start_url": "./비상연락망.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F2F3F5",
   "theme_color": "#1C5FA5",

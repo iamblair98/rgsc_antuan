@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="비상연락망">
+<meta name="theme-color" content="#1C5FA5">
+<link rel="manifest" href="manifest.json">
+<title>사내 비상연락망</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+a { text-decoration: none; color: inherit; }
+
+body {
+  font-family: -apple-system, 'Apple SD Gothic Neo', BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+  background: #F2F3F5;
+  padding-bottom: 40px;
+}
+
+/* ── Hero ── */
+.hero {
+  background: #1C5FA5;
+  padding: 22px 20px 20px;
+  color: #fff;
+}
+.hero-label { font-size: 10px; font-weight: 700; letter-spacing: 1.4px; opacity: .6; text-transform: uppercase; margin-bottom: 6px; }
+.hero-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.hero-title { font-size: 20px; font-weight: 800; letter-spacing: -.3px; margin-bottom: 4px; }
+.hero-sub { font-size: 11px; opacity: .55; }
+.hero-count { background: rgba(255,255,255,.18); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+
+/* ── Section ── */
+.section { padding: 18px 12px 0; }
+
+.section-toggle {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: none; padding: 0 2px 8px;
+  cursor: pointer; width: 100%;
+}
+.section-toggle .sec-label {
+  font-size: 17px; font-weight: 800; letter-spacing: 1.2px;
+  color: #8E8E93; text-transform: lowercase;
+}
+.section-toggle .chevron {
+  width: 13px; height: 13px; margin-left: 2px;
+  transition: transform 0.2s ease;
+  color: #AEAEB2;
+}
+.section-toggle.collapsed .chevron { transform: rotate(-90deg); }
+
+.col-list { display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+.col-list.collapsed { display: none; }
+
+/* ── Card ── */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  border: 0.5px solid #E2E0DA;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  overflow: hidden;
+}
+
+/*
+  Grid: 54px (avatar col) | 1fr (name/badge) | auto (phone)
+  avatar col wider so name & badge left-edge aligns to orange line
+*/
+.row {
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center;
+  padding: 0 16px;
+  width: 100%;
+}
+.row-top    { min-height: 56px; align-items: center; }
+.row-bottom { min-height: 38px; align-items: center; }
+
+.divider { height: 0.5px; background: #EEEDE8; margin: 0 16px; }
+
+/* col1: Avatar — centered in its 54px column */
+.avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #EEEDFE; color: #3C3489;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  justify-self: center;
+}
+
+/* col2: name (row1) — left-aligned, orange guideline */
+.emp-name {
+  font-size: 17px; font-weight: 700;
+  color: #1a1a1a; letter-spacing: -.3px;
+  white-space: nowrap;
+  justify-self: start;
+}
+
+/* col3: phone — right-aligned, purple guideline */
+.phone-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  white-space: nowrap;
+  justify-self: end;
+  font-size: 13px; font-weight: 700;
+}
+.phone-link svg { width: 13px; height: 13px; flex-shrink: 0; }
+.phone-own { color: #1C5FA5; }
+
+/* col2: badge group (row2) — same left edge as name */
+.relation-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: start;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 62px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rel-name {
+  font-size: 11px;
+  color: #6B6B6B;
+  white-space: nowrap;
+}
+
+/* ── Footer ── */
+.footer { text-align: center; padding: 28px 0 4px; font-size: 10px; color: #C0C0C5; }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .row { padding: 0 12px; }
+  .row { grid-template-columns: 52px 1fr auto; }
+  .row-top { min-height: 52px; }
+  .row-bottom { min-height: 36px; }
+  .divider { margin: 0 12px; }
+  .avatar { width: 36px; height: 36px; font-size: 10px; }
+  .emp-name { font-size: 15px; }
+  .phone-link { font-size: 12px; }
+  .phone-link svg { width: 12px; height: 12px; }
+  .badge { font-size: 10px; width: 56px; height: 22px; }
+  .rel-name { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Emergency Contacts</div>
+  <div class="hero-row">
+    <div>
+      <div class="hero-title">사내 임직원 비상연락망</div>
+      <div class="hero-sub">전화번호를 누르면 바로 전화 연결됩니다</div>
+    </div>
+    <span class="hero-count">총 10명</span>
+  </div>
+</div>
+
+<!-- ══ rgsc ══ -->
+<div class="section">
+  <button class="section-toggle" onclick="toggleSection(this)">
+    <span class="sec-label">rgsc</span>
+    <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="2,3 5,7 8,3"/>
+    </svg>
+  </button>
+  <div class="col-list">
+
+    <!-- 김종현 | 본인없음 | 어머니 010-8410-7798 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">종현</div>
+        <span class="emp-name">김종현</span>
+        <span></span>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#C5EEE0;color:#085041">어머니</span>
+        </div>
+        <a class="phone-link" href="tel:01084107798" style="color:#085041">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-8410-7798
+        </a>
+      </div>
+    </div>
+
+    <!-- 김지식 | 010-5585-6824 | 아버지 김덕만 010-5102-6824 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">지식</div>
+        <span class="emp-name">김지식</span>
+        <a class="phone-link phone-own" href="tel:01055856824">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-5585-6824
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#D3E7FA;color:#0C447C">아버지</span>
+          <span class="rel-name">김덕만</span>
+        </div>
+        <a class="phone-link" href="tel:01051026824" style="color:#0C447C">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-5102-6824
+        </a>
+      </div>
+    </div>
+
+    <!-- 박진우 | 010-2711-3641 | 어머니 010-4713-3158 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">진우</div>
+        <span class="emp-name">박진우</span>
+        <a class="phone-link phone-own" href="tel:01027113641">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-2711-3641
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#C5EEE0;color:#085041">어머니</span>
+        </div>
+        <a class="phone-link" href="tel:01047133158" style="color:#085041">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-4713-3158
+        </a>
+      </div>
+    </div>
+
+    <!-- 이동규 | 010-9927-5727 | 형 010-8915-5727 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">동규</div>
+        <span class="emp-name">이동규</span>
+        <a class="phone-link phone-own" href="tel:01099275727">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-9927-5727
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#F5D6CB;color:#712B13">형</span>
+        </div>
+        <a class="phone-link" href="tel:01089155727" style="color:#712B13">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-8915-5727
+        </a>
+      </div>
+    </div>
+
+    <!-- 전채민 | 010-7931-8142 | 아버지 010-4008-3250 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">채민</div>
+        <span class="emp-name">전채민</span>
+        <a class="phone-link phone-own" href="tel:01079318142">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-7931-8142
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#D3E7FA;color:#0C447C">아버지</span>
+        </div>
+        <a class="phone-link" href="tel:01040083250" style="color:#0C447C">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-4008-3250
+        </a>
+      </div>
+    </div>
+
+    <!-- 조영진 | 010-4709-9380 | 배우자 010-4718-9380 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">영진</div>
+        <span class="emp-name">조영진</span>
+        <a class="phone-link phone-own" href="tel:01047099380">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-4709-9380
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#D5EBBE;color:#27500A">배우자</span>
+        </div>
+        <a class="phone-link" href="tel:01047189380" style="color:#27500A">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-4718-9380
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /rgsc -->
+
+<!-- ══ antuan ══ -->
+<div class="section">
+  <button class="section-toggle" onclick="toggleSection(this)">
+    <span class="sec-label">antuan</span>
+    <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="2,3 5,7 8,3"/>
+    </svg>
+  </button>
+  <div class="col-list">
+
+    <!-- 공민주 | 010-5117-8458 | 언니 010-2521-8821 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">민주</div>
+        <span class="emp-name">공민주</span>
+        <a class="phone-link phone-own" href="tel:01051178458">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-5117-8458
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#F6CEDF;color:#72243E">언니</span>
+        </div>
+        <a class="phone-link" href="tel:01025218821" style="color:#72243E">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-2521-8821
+        </a>
+      </div>
+    </div>
+
+    <!-- 박정은 | 010-5730-7096 | 남자친구 010-2232-2949 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">정은</div>
+        <span class="emp-name">박정은</span>
+        <a class="phone-link phone-own" href="tel:01057307096">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-5730-7096
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#F5E0B5;color:#633806">남자친구</span>
+        </div>
+        <a class="phone-link" href="tel:01022322949" style="color:#633806">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-2232-2949
+        </a>
+      </div>
+    </div>
+
+    <!-- 심혜연 | 010-5505-6193 | 배우자 이승우 010-2643-8736 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">혜연</div>
+        <span class="emp-name">심혜연</span>
+        <a class="phone-link phone-own" href="tel:01055056193">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-5505-6193
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#D5EBBE;color:#27500A">배우자</span>
+          <span class="rel-name">이승우</span>
+        </div>
+        <a class="phone-link" href="tel:01026438736" style="color:#27500A">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-2643-8736
+        </a>
+      </div>
+    </div>
+
+    <!-- 황영지 | 010-5631-7304 | 남자친구 손병권 010-7444-2767 -->
+    <div class="card">
+      <div class="row row-top">
+        <div class="avatar">영지</div>
+        <span class="emp-name">황영지</span>
+        <a class="phone-link phone-own" href="tel:01056317304">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-5631-7304
+        </a>
+      </div>
+      <div class="divider"></div>
+      <div class="row row-bottom">
+        <span></span>
+        <div class="relation-wrap">
+          <span class="badge" style="background:#F5E0B5;color:#633806">남자친구</span>
+          <span class="rel-name">손병권</span>
+        </div>
+        <a class="phone-link" href="tel:01074442767" style="color:#633806">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          010-7444-2767
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /antuan -->
+
+<div class="footer">2026년 3월 기준 · 인사팀 관리</div>
+
+<script>
+function toggleSection(btn) {
+  btn.classList.toggle('collapsed');
+  const list = btn.nextElementSibling;
+  list.classList.toggle('collapsed');
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>

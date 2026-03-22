@@ -1,37 +1,25 @@
 {
-  "name": "사내 임직원 비상연락망",
+  "name": "RGSC&ANTUAN 임직원 비상연락망",
   "short_name": "비상연락망",
-  "description": "사내 임직원 비상연락처 앱",
+  "description": "RGSC&ANTUAN 사내 임직원 비상연락망",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#F2F3F5",
-  "theme_color": "#1C5FA5",
   "orientation": "portrait",
+  "background_color": "#f5f5f0",
+  "theme_color": "#f5f5f0",
+  "lang": "ko",
   "icons": [
     {
       "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }

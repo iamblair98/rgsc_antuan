@@ -2,461 +2,694 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="비상연락망">
-<meta name="theme-color" content="#1C5FA5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#f5f5f0">
+<meta name="format-detection" content="telephone=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="manifest" href="manifest.json">
-<title>사내 비상연락망</title>
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>RGSC&ANTUAN 임직원 비상연락망</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-a { text-decoration: none; color: inherit; }
-
-body {
-  font-family: -apple-system, 'Apple SD Gothic Neo', BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
-  background: #F2F3F5;
-  padding-bottom: 40px;
-}
-
-/* ── Hero ── */
-.hero {
-  background: #111111;
-  padding: 22px 20px 20px;
-  color: #fff;
-}
-.hero-label { font-size: 10px; font-weight: 700; letter-spacing: 1.4px; opacity: .6; text-transform: uppercase; margin-bottom: 6px; }
-.hero-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
-.hero-title { font-size: 20px; font-weight: 800; letter-spacing: -.3px; margin-bottom: 4px; }
-.hero-sub { font-size: 11px; opacity: .55; }
-.hero-count { background: rgba(255,255,255,.18); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
-
-/* ── Section ── */
-.section { padding: 18px 12px 0; }
-
-.section-toggle {
-  display: flex; align-items: center; gap: 6px;
-  background: none; border: none; padding: 0 2px 8px;
-  cursor: pointer; width: 100%;
-}
-.section-toggle .sec-label {
-  font-size: 17px; font-weight: 800; letter-spacing: 1.2px;
-  color: #8E8E93; text-transform: lowercase;
-}
-.section-toggle .chevron {
-  width: 13px; height: 13px; margin-left: 2px;
-  transition: transform 0.2s ease;
-  color: #AEAEB2;
-}
-.section-toggle.collapsed .chevron { transform: rotate(-90deg); }
-
-.col-list { display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
-.col-list.collapsed { display: none; }
-
-/* ── Card ── */
-.card {
-  background: #fff;
-  border-radius: 12px;
-  border: 0.5px solid #E2E0DA;
-  box-shadow: 0 1px 3px rgba(0,0,0,.05);
-  overflow: hidden;
-}
-
-/*
-  Grid: 54px (avatar col) | 1fr (name/badge) | auto (phone)
-  avatar col wider so name & badge left-edge aligns to orange line
-*/
-.row {
-  display: grid;
-  grid-template-columns: 44px minmax(0,1fr) auto;
-  column-gap: 14px;
-  align-items: center;
-  padding: 0 16px;
-  width: 100%;
-}
-.row-top    { min-height: 56px; align-items: center; }
-.row-bottom { min-height: 38px; align-items: center; }
-
-.divider { height: 0.5px; background: #EEEDE8; margin: 0 16px; }
-
-/* col1: Avatar — centered in its 54px column */
-.avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: #EEEDFE; color: #3C3489;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800;
-  justify-self: center;
-}
-
-/* col2: name (row1) — left-aligned, orange guideline */
-.emp-name {
-  font-size: 17px; font-weight: 700;
-  color: #1a1a1a; letter-spacing: -.3px;
-  white-space: nowrap;
-  justify-self: start;
-}
-
-/* col3: phone — right-aligned, purple guideline */
-.phone-link {
-  display: inline-flex; align-items: center; gap: 4px;
-  white-space: nowrap;
-  justify-self: end;
-  font-size: 13px; font-weight: 700;
-}
-.phone-link svg { width: 13px; height: 13px; flex-shrink: 0; }
-.phone-own { color: #1C5FA5; }
-
-/* col2: badge group (row2) — same left edge as name */
-.relation-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  justify-self: start;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  width: 62px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.rel-name {
-  font-size: 11px;
-  color: #6B6B6B;
-  white-space: nowrap;
-}
-
-/* ── Footer ── */
-.footer { text-align: center; padding: 28px 0 4px; font-size: 10px; color: #C0C0C5; }
-
-/* ── Mobile (아이폰, 갤럭시 일반) ── */
-@media (max-width: 600px) {
-  .row {
-    grid-template-columns: 48px minmax(0,1fr) auto;
-    column-gap: 10px;
-    padding: 0 12px;
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --bg: #f5f5f0; --card-bg: #ffffff; --text-primary: #1a1a1a;
+    --text-secondary: #6b6b6b; --text-muted: #999999;
+    --accent-rgsc: #bfcba2; --accent-rgsc-text: #4a5638;
+    --accent-antuan: #ffdc9e; --accent-antuan-text: #6b5a2f;
+    --border: #e5e5e0; --shadow: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.08); --radius: 14px;
+    --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px); --safe-right: env(safe-area-inset-right, 0px);
   }
-  .row-top { min-height: 52px; }
-  .row-bottom { min-height: 36px; }
-  .divider { margin: 0 12px; }
-  .avatar { width: 36px; height: 36px; font-size: 10px; }
-  .emp-name { font-size: 15px; }
-  .phone-link { font-size: 12px; }
-  .phone-link svg { width: 12px; height: 12px; }
-  .badge { font-size: 10px; width: 56px; height: 22px; }
-  .rel-name { font-size: 10px; }
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  body { font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; min-height: -webkit-fill-available; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding-top: var(--safe-top); padding-bottom: var(--safe-bottom); padding-left: var(--safe-left); padding-right: var(--safe-right); overscroll-behavior-y: contain; }
+  .container { max-width: 520px; margin: 0 auto; padding: 0 16px 40px; }
+  .header { text-align: center; padding: 48px 20px 32px; }
+  .header::after { display: none; }
+  .header-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+  .header-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.3; }
+  .header-sub { font-size: 13px; color: var(--text-secondary); margin-top: 10px; }
+  .badge { display: inline-block; background: var(--text-primary); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-top: 14px; }
+  .group { margin-top: 17px; }
+  .group-header { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: space-between; justify-content: space-between; padding: 14px 18px; background: var(--card-bg); border-radius: var(--radius); cursor: pointer; -webkit-user-select: none; user-select: none; box-shadow: var(--shadow); border: 1px solid var(--border); -webkit-transition: all 0.2s ease; transition: all 0.2s ease; }
+  .group-header:hover { box-shadow: var(--shadow-hover); }
+  .group-header:active { -webkit-transform: scale(0.99); transform: scale(0.99); }
+  .group-header-left { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 10px; }
+  .group-dot { width: 10px; height: 10px; border-radius: 50%; -webkit-flex-shrink: 0; flex-shrink: 0; }
+  .group-dot.rgsc { background: var(--accent-rgsc); }
+  .group-dot.antuan { background: var(--accent-antuan); }
+  .group-name { font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .group-count { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .group-chevron { width: 24px; height: 24px; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; -webkit-transition: transform 0.3s ease; transition: transform 0.3s ease; color: var(--text-muted); }
+  .group.collapsed .group-chevron { -webkit-transform: rotate(-90deg); transform: rotate(-90deg); }
+  .group-body { overflow: hidden; -webkit-transition: max-height 0.4s ease, opacity 0.3s ease; transition: max-height 0.4s ease, opacity 0.3s ease; max-height: 5000px; opacity: 1; }
+  .group.collapsed .group-body { max-height: 0; opacity: 0; }
+  .person-card { background: var(--card-bg); border-radius: var(--radius); margin-top: 10px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--border); -webkit-transition: box-shadow 0.2s ease; transition: box-shadow 0.2s ease; }
+  .person-card:hover { box-shadow: var(--shadow-hover); }
+  .person-main { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 14px; padding: 16px 18px; }
+  .person-avatar { width: 44px; height: 44px; border-radius: 50%; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; font-size: 15px; font-weight: 700; -webkit-flex-shrink: 0; flex-shrink: 0; letter-spacing: -0.5px; }
+  .person-avatar.rgsc { background: var(--accent-rgsc); color: var(--accent-rgsc-text); }
+  .person-avatar.antuan { background: var(--accent-antuan); color: var(--accent-antuan-text); }
+  .person-info { display: -webkit-flex; display: flex; -webkit-align-items: baseline; align-items: baseline; gap: 8px; -webkit-flex: 1; flex: 1; min-width: 0; }
+  .person-name { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; white-space: nowrap; }
+  .person-eng { font-size: 13px; font-weight: 500; color: #555; white-space: nowrap; }
+  .contact-rows { border-top: 1px solid var(--border); }
+  .contact-row { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; padding: 0 18px; min-height: 46px; border-bottom: 1px solid #f5f5f0; }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row .relation-tag { font-size: 11px; font-weight: 500; color: var(--text-muted); width: 52px; -webkit-flex-shrink: 0; flex-shrink: 0; }
+  .contact-row .relation-name { font-size: 11px; color: var(--text-secondary); font-weight: 400; width: 44px; -webkit-flex-shrink: 0; flex-shrink: 0; }
+  .relation-name-placeholder { width: 44px; -webkit-flex-shrink: 0; flex-shrink: 0; }
+  .contact-text { font-size: 13px; font-weight: 500; color: var(--text-primary); -webkit-font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; -webkit-flex: 1; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .contact-actions { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 2px; margin-left: auto; -webkit-flex-shrink: 0; flex-shrink: 0; padding-left: 4px; }
+  .icon-btn { display: -webkit-inline-flex; display: inline-flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; cursor: pointer; color: var(--text-secondary); -webkit-transition: all 0.15s ease; transition: all 0.15s ease; position: relative; text-decoration: none; -webkit-appearance: none; appearance: none; touch-action: manipulation; }
+  .icon-btn:hover { background: #f0f0eb; color: var(--text-primary); }
+  .icon-btn:active { -webkit-transform: scale(0.92); transform: scale(0.92); background: #eaeae5; }
+  .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.8; }
+  .icon-btn.email-btn svg { width: 19px; height: 19px; }
+  .toast-container { position: fixed; bottom: calc(24px + var(--safe-bottom)); left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); z-index: 1000; pointer-events: none; }
+  .toast { background: var(--text-primary); color: #fff; padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; opacity: 0; -webkit-transform: translateY(10px); transform: translateY(10px); -webkit-transition: all 0.3s ease; transition: all 0.3s ease; white-space: nowrap; }
+  .toast.show { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+  .footer { text-align: center; margin-top: 32px; padding: 16px; font-size: 12px; color: var(--text-muted); }
+  @media (max-width: 300px) { .container { padding: 0 10px 32px; } .header { padding: 32px 10px 24px; } .header-title { font-size: 18px; } .person-main { padding: 12px 12px; gap: 10px; } .person-avatar { width: 36px; height: 36px; font-size: 13px; } .person-name { font-size: 14px; } .person-eng { font-size: 11px; } .contact-row { padding: 0 12px; min-height: 42px; } .contact-row .relation-tag { width: 42px; font-size: 10px; } .contact-row .relation-name { width: 36px; font-size: 10px; } .relation-name-placeholder { width: 36px; } .contact-text { font-size: 11px; } .icon-btn { width: 38px; height: 38px; } .icon-btn svg { width: 16px; height: 16px; } .group-header { padding: 12px 12px; } }
+  @media (min-width: 301px) and (max-width: 380px) { .container { padding: 0 12px 36px; } .person-main { padding: 14px 14px; } .contact-row { padding: 0 14px; } .contact-text { font-size: 12px; } .contact-row .relation-tag { width: 48px; } .contact-row .relation-name { width: 40px; } .relation-name-placeholder { width: 40px; } }
+  @media (min-width: 768px) { .container { padding: 0 24px 60px; } .header { padding: 64px 20px 40px; } .header-title { font-size: 26px; } .person-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); } }
+  @media (display-mode: standalone) { .header { padding-top: calc(20px + var(--safe-top)); } }
 
-/* ── 갤럭시 폴드 접힘 (280px~320px) ── */
-@media (max-width: 320px) {
-  .hero-title { font-size: 16px; }
-  .row {
-    grid-template-columns: 40px minmax(0,1fr) auto;
-    column-gap: 6px;
-    padding: 0 8px;
+  /* Search badge */
+  .search-badge {
+    display: -webkit-inline-flex; display: inline-flex;
+    -webkit-align-items: center; align-items: center;
+    background: #ffffff; color: var(--text-secondary);
+    font-size: 12px; font-weight: 600;
+    padding: 0 12px; height: 34px;
+    border-radius: 20px; margin-top: 14px;
+    width: 132px;
+    -webkit-justify-content: center; justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    -webkit-transition: all 0.35s ease; transition: all 0.35s ease;
+    position: relative; overflow: hidden;
+    border: 1px solid var(--border); box-shadow: var(--shadow);
   }
-  .avatar { width: 32px; height: 32px; font-size: 9px; }
-  .emp-name { font-size: 13px; }
-  .phone-link { font-size: 10px; gap: 2px; }
-  .phone-link svg { width: 10px; height: 10px; }
-  .badge { font-size: 9px; width: 48px; height: 20px; }
-  .rel-name { font-size: 9px; }
-  .section { padding: 14px 8px 0; }
-}
+  .search-badge.active {
+    width: min(90%, 360px); background: var(--card-bg);
+    -webkit-justify-content: space-between; justify-content: space-between;
+    border: 1px solid var(--border); box-shadow: var(--shadow-hover);
+    padding: 0 14px; cursor: default;
+  }
+  .search-badge-text {
+    -webkit-transition: opacity 0.2s ease; transition: opacity 0.2s ease;
+    white-space: nowrap; color: var(--text-muted);
+  }
+  .search-badge.active .search-badge-text { opacity: 0; width: 0; overflow: hidden; position: absolute; }
+  .search-input {
+    border: none; outline: none; background: transparent;
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    color: var(--text-primary); width: 0; padding: 0;
+    -webkit-transition: width 0.3s ease, opacity 0.2s ease; transition: width 0.3s ease, opacity 0.2s ease;
+    -webkit-flex: 0; flex: 0;
+    opacity: 0;
+  }
+  .search-badge.active .search-input {
+    width: 100%; -webkit-flex: 1; flex: 1; opacity: 1;
+  }
+  .search-icon {
+    width: 16px; height: 16px; -webkit-flex-shrink: 0; flex-shrink: 0;
+    color: var(--text-muted); -webkit-transition: color 0.2s; transition: color 0.2s;
+  }
+  .search-badge.active .search-icon { color: var(--text-muted); }
+  .search-close {
+    display: none; width: 20px; height: 20px; border: none; background: transparent;
+    cursor: pointer; color: var(--text-muted); padding: 0;
+    -webkit-align-items: center; align-items: center;
+    -webkit-justify-content: center; justify-content: center;
+    -webkit-flex-shrink: 0; flex-shrink: 0;
+    touch-action: manipulation;
+  }
+  .search-badge.active .search-close { display: -webkit-inline-flex; display: inline-flex; }
+  .search-count {
+    font-size: 11px; color: var(--text-muted); font-weight: 500;
+    margin-top: 8px; display: none; -webkit-transition: opacity 0.2s; transition: opacity 0.2s;
+  }
+  .search-count.visible { display: block; }
+  .person-card.search-hidden { display: none; }
+  .group-body .no-result {
+    text-align: center; padding: 24px 16px; color: var(--text-muted);
+    font-size: 13px; display: none;
+  }
+  .group-body .no-result.visible { display: block; }
+
+  .search-input::placeholder { color: var(--text-muted); font-weight: 400; }
+  .search-no-result { text-align: center; padding: 32px 16px; font-size: 13px; color: var(--text-muted); display: none; }
+  .search-no-result.show { display: block; }
+  .person-card.search-hidden { display: none; }
+  .group.search-hidden-group { display: none; }
 </style>
 </head>
 <body>
-
-<div class="hero">
-  <div class="hero-label">Emergency Contacts</div>
-  <div class="hero-row">
-    <div>
-      <div class="hero-title">사내 임직원 비상연락망</div>
-      <div class="hero-sub">전화번호를 누르면 바로 전화 연결됩니다</div>
+<div class="container">
+  <div class="header">
+    <div class="header-label">Emergency Contacts</div>
+    <div class="header-title">RGSC&ANTUAN<br>임직원 비상연락망</div>
+    <div class="header-sub">연락처를 누르면 바로 전화 · 메일이 연결됩니다</div>
+    <div class="search-badge" id="searchBadge" onclick="activateSearch()">
+      <span class="search-badge-text">총 10명</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="이름, 영어이름, 번호 검색" oninput="doSearch(this.value)" autocomplete="off">
+      <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+      <button class="search-close" onclick="deactivateSearch(event)" title="닫기"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
-    <span class="hero-count">총 10명</span>
+    <div class="search-count" id="searchCount"></div>
   </div>
+
+  <div class="group" id="group-rgsc">
+    <div class="group-header" onclick="toggleGroup('group-rgsc')">
+      <div class="group-header-left">
+        <div class="group-dot rgsc"></div>
+        <div class="group-name">RGSC</div>
+        <div class="group-count">6명</div>
+      </div>
+      <div class="group-chevron"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    </div>
+    <div class="group-body">
+
+      <div class="person-card" data-search="김종현 henry jonghyeon.k@sweatch.ai 010-8410-7798 010-8410-7798">
+        <div class="person-main">
+          <div class="person-avatar rgsc">종현</div>
+          <div class="person-info"><div class="person-name">김종현</div><div class="person-eng">Henry</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">jonghyeon.k@sweatch.ai</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=jonghyeon.k@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('jonghyeon.k@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-8410-7798</span>
+            <div class="contact-actions">
+              <a href="tel:01084107798" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-8410-7798')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">어머니</span><span class="relation-name"></span>
+            <span class="contact-text">010-8410-7798</span>
+            <div class="contact-actions">
+              <a href="tel:01084107798" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-8410-7798')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="김지식 dan dan.k@sweatch.ai 010-5585-6824 010-5102-6824">
+        <div class="person-main">
+          <div class="person-avatar rgsc">지식</div>
+          <div class="person-info"><div class="person-name">김지식</div><div class="person-eng">Dan</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">dan.k@sweatch.ai</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=dan.k@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('dan.k@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-5585-6824</span>
+            <div class="contact-actions">
+              <a href="tel:01055856824" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-5585-6824')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">아버지</span><span class="relation-name">김덕만</span>
+            <span class="contact-text">010-5102-6824</span>
+            <div class="contact-actions">
+              <a href="tel:01051026824" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-5102-6824')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="박진우 jin jinwoo.p@sweatch.ai 010-2711-3641 010-4713-3158">
+        <div class="person-main">
+          <div class="person-avatar rgsc">진우</div>
+          <div class="person-info"><div class="person-name">박진우</div><div class="person-eng">Jin</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">jinwoo.p@sweatch.ai</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=jinwoo.p@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('jinwoo.p@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-2711-3641</span>
+            <div class="contact-actions">
+              <a href="tel:01027113641" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-2711-3641')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">어머니</span><span class="relation-name"></span>
+            <span class="contact-text">010-4713-3158</span>
+            <div class="contact-actions">
+              <a href="tel:01047133158" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-4713-3158')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="이동규 david david.l@sweatch.ai 010-9927-5727 010-8915-5727">
+        <div class="person-main">
+          <div class="person-avatar rgsc">동규</div>
+          <div class="person-info"><div class="person-name">이동규</div><div class="person-eng">David</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">david.l@sweatch.ai</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=david.l@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('david.l@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-9927-5727</span>
+            <div class="contact-actions">
+              <a href="tel:01099275727" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-9927-5727')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">형</span><span class="relation-name"></span>
+            <span class="contact-text">010-8915-5727</span>
+            <div class="contact-actions">
+              <a href="tel:01089155727" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-8915-5727')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="전채민 chaechae chaechae.j@sweatch.ai 010-7931-8142 010-4008-3250">
+        <div class="person-main">
+          <div class="person-avatar rgsc">채민</div>
+          <div class="person-info"><div class="person-name">전채민</div><div class="person-eng">Chaechae</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">chaechae.j@sweatch.ai</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=chaechae.j@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('chaechae.j@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-7931-8142</span>
+            <div class="contact-actions">
+              <a href="tel:01079318142" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-7931-8142')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">아버지</span><span class="relation-name"></span>
+            <span class="contact-text">010-4008-3250</span>
+            <div class="contact-actions">
+              <a href="tel:01040083250" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-4008-3250')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="조영진 ethan ethan.j@sweatch.ai 010-4709-9380 010-4718-9380">
+        <div class="person-main">
+          <div class="person-avatar rgsc">영진</div>
+          <div class="person-info"><div class="person-name">조영진</div><div class="person-eng">Ethan</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">ethan.j@sweatch.ai</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=ethan.j@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('ethan.j@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-4709-9380</span>
+            <div class="contact-actions">
+              <a href="tel:01047099380" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-4709-9380')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">배우자</span><span class="relation-name"></span>
+            <span class="contact-text">010-4718-9380</span>
+            <div class="contact-actions">
+              <a href="tel:01047189380" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-4718-9380')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="group" id="group-antuan">
+    <div class="group-header" onclick="toggleGroup('group-antuan')">
+      <div class="group-header-left">
+        <div class="group-dot antuan"></div>
+        <div class="group-name">ANTUAN</div>
+        <div class="group-count">4명</div>
+      </div>
+      <div class="group-chevron"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    </div>
+    <div class="group-body">
+
+      <div class="person-card" data-search="공민주 jua jua.k@antuan.co.kr 010-5117-8458 010-2521-8821">
+        <div class="person-main">
+          <div class="person-avatar antuan">민주</div>
+          <div class="person-info"><div class="person-name">공민주</div><div class="person-eng">Jua</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">jua.k@antuan.co.kr</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=jua.k@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('jua.k@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-5117-8458</span>
+            <div class="contact-actions">
+              <a href="tel:01051178458" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-5117-8458')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">언니</span><span class="relation-name"></span>
+            <span class="contact-text">010-2521-8821</span>
+            <div class="contact-actions">
+              <a href="tel:01025218821" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-2521-8821')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="박정은 judy judy.p@antuan.co.kr 010-5730-7096 010-2232-2949">
+        <div class="person-main">
+          <div class="person-avatar antuan">정은</div>
+          <div class="person-info"><div class="person-name">박정은</div><div class="person-eng">Judy</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">judy.p@antuan.co.kr</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=judy.p@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('judy.p@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-5730-7096</span>
+            <div class="contact-actions">
+              <a href="tel:01057307096" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-5730-7096')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">남자친구</span><span class="relation-name"></span>
+            <span class="contact-text">010-2232-2949</span>
+            <div class="contact-actions">
+              <a href="tel:01022322949" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-2232-2949')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="심혜연 kelly kelly.s@antuan.co.kr 010-5505-6193 010-2643-8736">
+        <div class="person-main">
+          <div class="person-avatar antuan">혜연</div>
+          <div class="person-info"><div class="person-name">심혜연</div><div class="person-eng">Kelly</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">kelly.s@antuan.co.kr</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=kelly.s@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('kelly.s@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-5505-6193</span>
+            <div class="contact-actions">
+              <a href="tel:01055056193" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-5505-6193')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">배우자</span><span class="relation-name">이승우</span>
+            <span class="contact-text">010-2643-8736</span>
+            <div class="contact-actions">
+              <a href="tel:01026438736" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-2643-8736')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card" data-search="황영지 blair blair.h@antuan.co.kr 010-5631-7304 010-7444-2767">
+        <div class="person-main">
+          <div class="person-avatar antuan">영지</div>
+          <div class="person-info"><div class="person-name">황영지</div><div class="person-eng">Blair</div></div>
+        </div>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">blair.h@antuan.co.kr</span>
+            <div class="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&amp;to=blair.h@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
+              <button class="icon-btn" onclick="copyText('blair.h@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
+            <span class="contact-text">010-5631-7304</span>
+            <div class="contact-actions">
+              <a href="tel:01056317304" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-5631-7304')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="relation-tag">남자친구</span><span class="relation-name">손병권</span>
+            <span class="contact-text">010-7444-2767</span>
+            <div class="contact-actions">
+              <a href="tel:01074442767" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-7444-2767')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-result">검색 결과가 없습니다</div>
+    </div>
+  </div>
+
+  <div class="search-no-result" id="noResult">검색 결과가 없습니다</div>
+
+  <div class="footer">2026년 3월 기준 · 경영지원팀 관리</div>
 </div>
 
-<!-- ══ rgsc ══ -->
-<div class="section">
-  <button class="section-toggle" onclick="toggleSection(this)">
-    <span class="sec-label">rgsc</span>
-    <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="2,3 5,7 8,3"/>
-    </svg>
-  </button>
-  <div class="col-list">
-
-    <!-- 김종현 | 본인없음 | 어머니 010-8410-7798 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">종현</div>
-        <span class="emp-name">김종현</span>
-        <span></span>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#C5EEE0;color:#085041">어머니</span>
-        </div>
-        <a class="phone-link" href="tel:01084107798" style="color:#085041">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-8410-7798
-        </a>
-      </div>
-    </div>
-
-    <!-- 김지식 | 010-5585-6824 | 아버지 김덕만 010-5102-6824 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">지식</div>
-        <span class="emp-name">김지식</span>
-        <a class="phone-link phone-own" href="tel:01055856824">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-5585-6824
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#D3E7FA;color:#0C447C">아버지</span>
-          <span class="rel-name">김덕만</span>
-        </div>
-        <a class="phone-link" href="tel:01051026824" style="color:#0C447C">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-5102-6824
-        </a>
-      </div>
-    </div>
-
-    <!-- 박진우 | 010-2711-3641 | 어머니 010-4713-3158 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">진우</div>
-        <span class="emp-name">박진우</span>
-        <a class="phone-link phone-own" href="tel:01027113641">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-2711-3641
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#C5EEE0;color:#085041">어머니</span>
-        </div>
-        <a class="phone-link" href="tel:01047133158" style="color:#085041">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-4713-3158
-        </a>
-      </div>
-    </div>
-
-    <!-- 이동규 | 010-9927-5727 | 형 010-8915-5727 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">동규</div>
-        <span class="emp-name">이동규</span>
-        <a class="phone-link phone-own" href="tel:01099275727">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-9927-5727
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#F5D6CB;color:#712B13">형</span>
-        </div>
-        <a class="phone-link" href="tel:01089155727" style="color:#712B13">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-8915-5727
-        </a>
-      </div>
-    </div>
-
-    <!-- 전채민 | 010-7931-8142 | 아버지 010-4008-3250 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">채민</div>
-        <span class="emp-name">전채민</span>
-        <a class="phone-link phone-own" href="tel:01079318142">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-7931-8142
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#D3E7FA;color:#0C447C">아버지</span>
-        </div>
-        <a class="phone-link" href="tel:01040083250" style="color:#0C447C">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-4008-3250
-        </a>
-      </div>
-    </div>
-
-    <!-- 조영진 | 010-4709-9380 | 배우자 010-4718-9380 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">영진</div>
-        <span class="emp-name">조영진</span>
-        <a class="phone-link phone-own" href="tel:01047099380">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-4709-9380
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#D5EBBE;color:#27500A">배우자</span>
-        </div>
-        <a class="phone-link" href="tel:01047189380" style="color:#27500A">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-4718-9380
-        </a>
-      </div>
-    </div>
-
-  </div>
-</div><!-- /rgsc -->
-
-<!-- ══ antuan ══ -->
-<div class="section">
-  <button class="section-toggle" onclick="toggleSection(this)">
-    <span class="sec-label">antuan</span>
-    <svg class="chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="2,3 5,7 8,3"/>
-    </svg>
-  </button>
-  <div class="col-list">
-
-    <!-- 공민주 | 010-5117-8458 | 언니 010-2521-8821 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">민주</div>
-        <span class="emp-name">공민주</span>
-        <a class="phone-link phone-own" href="tel:01051178458">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-5117-8458
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#F6CEDF;color:#72243E">언니</span>
-        </div>
-        <a class="phone-link" href="tel:01025218821" style="color:#72243E">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-2521-8821
-        </a>
-      </div>
-    </div>
-
-    <!-- 박정은 | 010-5730-7096 | 남자친구 010-2232-2949 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">정은</div>
-        <span class="emp-name">박정은</span>
-        <a class="phone-link phone-own" href="tel:01057307096">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-5730-7096
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#F5E0B5;color:#633806">남자친구</span>
-        </div>
-        <a class="phone-link" href="tel:01022322949" style="color:#633806">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-2232-2949
-        </a>
-      </div>
-    </div>
-
-    <!-- 심혜연 | 010-5505-6193 | 배우자 이승우 010-2643-8736 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">혜연</div>
-        <span class="emp-name">심혜연</span>
-        <a class="phone-link phone-own" href="tel:01055056193">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-5505-6193
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#D5EBBE;color:#27500A">배우자</span>
-          <span class="rel-name">이승우</span>
-        </div>
-        <a class="phone-link" href="tel:01026438736" style="color:#27500A">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-2643-8736
-        </a>
-      </div>
-    </div>
-
-    <!-- 황영지 | 010-5631-7304 | 남자친구 손병권 010-7444-2767 -->
-    <div class="card">
-      <div class="row row-top">
-        <div class="avatar">영지</div>
-        <span class="emp-name">황영지</span>
-        <a class="phone-link phone-own" href="tel:01056317304">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-5631-7304
-        </a>
-      </div>
-      <div class="divider"></div>
-      <div class="row row-bottom">
-        <span></span>
-        <div class="relation-wrap">
-          <span class="badge" style="background:#F5E0B5;color:#633806">남자친구</span>
-          <span class="rel-name">손병권</span>
-        </div>
-        <a class="phone-link" href="tel:01074442767" style="color:#633806">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .16h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          010-7444-2767
-        </a>
-      </div>
-    </div>
-
-  </div>
-</div><!-- /antuan -->
-
-<div class="footer">2026년 3월 기준 · 인사팀 관리</div>
+<div class="toast-container"><div class="toast" id="toast">복사되었습니다</div></div>
 
 <script>
-function toggleSection(btn) {
-  btn.classList.toggle('collapsed');
-  const list = btn.nextElementSibling;
-  list.classList.toggle('collapsed');
+function toggleGroup(id) { document.getElementById(id).classList.toggle('collapsed'); }
+
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() { showToast('복사되었습니다'); }).catch(function() { fallbackCopy(text); });
+  } else { fallbackCopy(text); }
+}
+
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.setAttribute('readonly', '');
+  ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+  document.body.appendChild(ta);
+  var range = document.createRange(); range.selectNodeContents(ta);
+  var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+  ta.setSelectionRange(0, 999999);
+  try { document.execCommand('copy'); showToast('복사되었습니다'); }
+  catch(e) { showToast('복사 실패'); }
+  document.body.removeChild(ta);
+}
+
+var toastTimer;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { t.classList.remove('show'); }, 1500);
+}
+
+/* Search */
+function activateSearch() {
+  var badge = document.getElementById('searchBadge');
+  if (badge.classList.contains('active')) return;
+  badge.classList.add('active');
+  var input = document.getElementById('searchInput');
+  setTimeout(function() { input.focus(); }, 350);
+  // Expand all groups when searching
+  document.querySelectorAll('.group.collapsed').forEach(function(g) { g.classList.remove('collapsed'); });
+}
+
+function deactivateSearch(e) {
+  e.stopPropagation();
+  var badge = document.getElementById('searchBadge');
+  var input = document.getElementById('searchInput');
+  input.value = '';
+  badge.classList.remove('active');
+  document.getElementById('searchCount').classList.remove('visible');
+  // Show all cards
+  document.querySelectorAll('.person-card').forEach(function(c) { c.classList.remove('search-hidden'); });
+  document.querySelectorAll('.no-result').forEach(function(n) { n.classList.remove('visible'); });
+}
+
+function doSearch(query) {
+  var q = query.trim().toLowerCase();
+  var cards = document.querySelectorAll('.person-card');
+  var totalVisible = 0;
+
+  if (!q) {
+    cards.forEach(function(c) { c.classList.remove('search-hidden'); });
+    document.getElementById('searchCount').classList.remove('visible');
+    document.querySelectorAll('.no-result').forEach(function(n) { n.classList.remove('visible'); });
+    return;
+  }
+
+  cards.forEach(function(card) {
+    var name = (card.querySelector('.person-name') || {}).textContent || '';
+    var eng = (card.querySelector('.person-eng') || {}).textContent || '';
+    var texts = card.querySelectorAll('.contact-text');
+    var allText = name.toLowerCase() + ' ' + eng.toLowerCase();
+    texts.forEach(function(t) { allText += ' ' + t.textContent.toLowerCase(); });
+    // Also search relation names
+    var relNames = card.querySelectorAll('.relation-name');
+    relNames.forEach(function(r) { allText += ' ' + r.textContent.toLowerCase(); });
+
+    if (allText.indexOf(q) !== -1) {
+      card.classList.remove('search-hidden');
+      totalVisible++;
+    } else {
+      card.classList.add('search-hidden');
+    }
+  });
+
+  // Show/hide no-result messages per group
+  document.querySelectorAll('.group').forEach(function(group) {
+    var visibleInGroup = group.querySelectorAll('.person-card:not(.search-hidden)').length;
+    var noResult = group.querySelector('.no-result');
+    if (noResult) {
+      if (visibleInGroup === 0) { noResult.classList.add('visible'); }
+      else { noResult.classList.remove('visible'); }
+    }
+    // Auto-expand groups during search
+    group.classList.remove('collapsed');
+  });
+
+  var countEl = document.getElementById('searchCount');
+  countEl.textContent = '검색 결과 ' + totalVisible + '명';
+  countEl.classList.add('visible');
 }
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  window.addEventListener('load', function() { navigator.serviceWorker.register('./sw.js'); });
+}
+
+function openSearch() {
+  document.getElementById('searchBar').style.display = 'none';
+  var wrap = document.getElementById('searchWrap');
+  wrap.classList.add('active');
+  document.getElementById('searchInput').focus();
+}
+
+function closeSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchWrap').classList.remove('active');
+  document.getElementById('searchBar').style.display = '';
+  doSearch('');
+}
+
+function doSearch(query) {
+  var q = query.toLowerCase().replace(/[\s-]/g, '');
+  var cards = document.querySelectorAll('.person-card[data-search]');
+  var groupVisible = { 'group-rgsc': 0, 'group-antuan': 0 };
+  var totalVisible = 0;
+
+  cards.forEach(function(card) {
+    var data = card.getAttribute('data-search').replace(/[\s-]/g, '');
+    if (!q || data.indexOf(q) !== -1) {
+      card.classList.remove('search-hidden');
+      totalVisible++;
+      var group = card.closest('.group');
+      if (group) groupVisible[group.id] = (groupVisible[group.id] || 0) + 1;
+    } else {
+      card.classList.add('search-hidden');
+    }
   });
+
+  // Show/hide groups
+  ['group-rgsc', 'group-antuan'].forEach(function(gid) {
+    var g = document.getElementById(gid);
+    if (!q) {
+      g.classList.remove('search-hidden-group');
+    } else if (groupVisible[gid] > 0) {
+      g.classList.remove('search-hidden-group');
+      g.classList.remove('collapsed');
+    } else {
+      g.classList.add('search-hidden-group');
+    }
+  });
+
+  // No result message
+  var noResult = document.getElementById('noResult');
+  if (q && totalVisible === 0) {
+    noResult.classList.add('show');
+  } else {
+    noResult.classList.remove('show');
+  }
 }
 </script>
-
 </body>
 </html>

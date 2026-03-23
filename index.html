@@ -65,19 +65,36 @@
   .contact-row .relation-tag { font-size: 11px; font-weight: 500; color: var(--text-muted); width: 52px; -webkit-flex-shrink: 0; flex-shrink: 0; }
   .contact-row .relation-name { font-size: 11px; color: var(--text-secondary); font-weight: 400; width: 44px; -webkit-flex-shrink: 0; flex-shrink: 0; }
   .relation-name-placeholder { width: 44px; -webkit-flex-shrink: 0; flex-shrink: 0; }
+    .contact-link { text-decoration: none; color: var(--text-primary); display: block; -webkit-flex: 1; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .contact-link:active { opacity: 0.6; }
   .contact-text { font-size: 13px; font-weight: 500; color: var(--text-primary); -webkit-font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; -webkit-flex: 1; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .contact-actions { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 2px; margin-left: auto; -webkit-flex-shrink: 0; flex-shrink: 0; padding-left: 4px; }
   .icon-btn { display: -webkit-inline-flex; display: inline-flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; border: none; background: transparent; cursor: pointer; color: var(--text-secondary); -webkit-transition: all 0.15s ease; transition: all 0.15s ease; position: relative; text-decoration: none; -webkit-appearance: none; appearance: none; touch-action: manipulation; }
   .icon-btn:hover { background: #f0f0eb; color: var(--text-primary); }
   .icon-btn:active { -webkit-transform: scale(0.92); transform: scale(0.92); background: #eaeae5; }
   .icon-btn svg { width: 18px; height: 18px; stroke-width: 1.8; }
-  .icon-btn.email-btn svg { width: 19px; height: 19px; }
+
   .toast-container { position: fixed; bottom: calc(24px + var(--safe-bottom)); left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); z-index: 1000; pointer-events: none; }
   .toast { background: var(--text-primary); color: #fff; padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; opacity: 0; -webkit-transform: translateY(10px); transform: translateY(10px); -webkit-transition: all 0.3s ease; transition: all 0.3s ease; white-space: nowrap; }
   .toast.show { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+  .share-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.25); z-index: 2000; -webkit-transition: opacity 0.2s; transition: opacity 0.2s; }
+  .share-overlay.show { display: block; }
+  .share-popup { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); border-radius: 16px 16px 0 0; padding: 8px 16px calc(12px + var(--safe-bottom)); z-index: 2001; -webkit-transform: translateY(100%); transform: translateY(100%); -webkit-transition: transform 0.3s ease; transition: transform 0.3s ease; }
+  .share-popup.show { -webkit-transform: translateY(0); transform: translateY(0); }
+  .share-popup-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 6px auto 12px; }
+  .share-popup-text { font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 12px; word-break: break-all; padding: 0 8px; }
+  .share-popup-actions { display: -webkit-flex; display: flex; gap: 10px; padding: 0 4px 4px; }
+  .share-action-btn { -webkit-flex: 1; flex: 1; display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; -webkit-align-items: center; align-items: center; gap: 6px; padding: 14px 0; border-radius: 12px; border: 1px solid var(--border); background: var(--card-bg); cursor: pointer; -webkit-transition: all 0.15s; transition: all 0.15s; touch-action: manipulation; }
+  .share-action-btn:active { background: #f0f0eb; -webkit-transform: scale(0.96); transform: scale(0.96); }
+  .share-action-btn svg { width: 22px; height: 22px; stroke-width: 1.6; color: var(--text-secondary); }
+  .share-action-btn span { font-size: 12px; font-weight: 500; color: var(--text-primary); font-family: inherit; }
   .footer { text-align: center; margin-top: 32px; padding: 16px; font-size: 12px; color: var(--text-muted); }
-  @media (max-width: 300px) { .container { padding: 0 10px 32px; } .header { padding: 32px 10px 24px; } .header-title { font-size: 18px; } .person-main { padding: 12px 12px; gap: 10px; } .person-avatar { width: 36px; height: 36px; font-size: 13px; } .person-name { font-size: 14px; } .person-eng { font-size: 11px; } .contact-row { padding: 0 12px; min-height: 42px; } .contact-row .relation-tag { width: 42px; font-size: 10px; } .contact-row .relation-name { width: 36px; font-size: 10px; } .relation-name-placeholder { width: 36px; } .contact-text { font-size: 11px; } .icon-btn { width: 38px; height: 38px; } .icon-btn svg { width: 16px; height: 16px; } .group-header { padding: 12px 12px; } }
-  @media (min-width: 301px) and (max-width: 380px) { .container { padding: 0 12px 36px; } .person-main { padding: 14px 14px; } .contact-row { padding: 0 14px; } .contact-text { font-size: 12px; } .contact-row .relation-tag { width: 48px; } .contact-row .relation-name { width: 40px; } .relation-name-placeholder { width: 40px; } }
+  @media (max-width: 300px) { .container { padding: 0 10px 32px; } .header { padding: 32px 10px 24px; } .header-title { font-size: 18px; } .person-main { padding: 12px 12px; gap: 10px; } .person-avatar { width: 36px; height: 36px; font-size: 13px; } .person-name { font-size: 14px; } .person-eng { font-size: 11px; } .contact-row { padding: 0 12px; min-height: 42px; } .contact-row .relation-tag { width: 42px; font-size: 10px; } .contact-row .relation-name { width: 36px; font-size: 10px; } .relation-name-placeholder { width: 36px; }   .contact-link { text-decoration: none; color: var(--text-primary); display: block; -webkit-flex: 1; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .contact-link:active { opacity: 0.6; }
+  .contact-text { font-size: 11px; } .icon-btn { width: 38px; height: 38px; } .icon-btn svg { width: 16px; height: 16px; } .group-header { padding: 12px 12px; } }
+  @media (min-width: 301px) and (max-width: 380px) { .container { padding: 0 12px 36px; } .person-main { padding: 14px 14px; } .contact-row { padding: 0 14px; }   .contact-link { text-decoration: none; color: var(--text-primary); display: block; -webkit-flex: 1; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .contact-link:active { opacity: 0.6; }
+  .contact-text { font-size: 12px; } .contact-row .relation-tag { width: 48px; } .contact-row .relation-name { width: 40px; } .relation-name-placeholder { width: 40px; } }
   @media (min-width: 768px) { .container { padding: 0 24px 60px; } .header { padding: 64px 20px 40px; } .header-title { font-size: 26px; } .person-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); } }
   @media (display-mode: standalone) { .header { padding-top: calc(20px + var(--safe-top)); } }
 
@@ -186,25 +203,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">jonghyeon.k@sweatch.ai</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=jonghyeon.k@sweatch.ai" target="_blank" rel="noopener" class="contact-text contact-link">jonghyeon.k@sweatch.ai</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=jonghyeon.k@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('jonghyeon.k@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-2493-7798</span>
+            <a href="tel:01024937798" class="contact-text contact-link">010-2493-7798</a>
             <div class="contact-actions">
-              <a href="tel:01024937798" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-2493-7798')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">어머니</span><span class="relation-name"></span>
-            <span class="contact-text">010-8410-7798</span>
+            <a href="tel:01084107798" class="contact-text contact-link">010-8410-7798</a>
             <div class="contact-actions">
-              <a href="tel:01084107798" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-8410-7798')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -219,25 +233,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">dan.k@sweatch.ai</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=dan.k@sweatch.ai" target="_blank" rel="noopener" class="contact-text contact-link">dan.k@sweatch.ai</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=dan.k@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('dan.k@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-5585-6824</span>
+            <a href="tel:01055856824" class="contact-text contact-link">010-5585-6824</a>
             <div class="contact-actions">
-              <a href="tel:01055856824" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-5585-6824')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">아버지</span><span class="relation-name">김덕만</span>
-            <span class="contact-text">010-5102-6824</span>
+            <a href="tel:01051026824" class="contact-text contact-link">010-5102-6824</a>
             <div class="contact-actions">
-              <a href="tel:01051026824" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-5102-6824')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -252,25 +263,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">jinwoo.p@sweatch.ai</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=jinwoo.p@sweatch.ai" target="_blank" rel="noopener" class="contact-text contact-link">jinwoo.p@sweatch.ai</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=jinwoo.p@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('jinwoo.p@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-2711-3641</span>
+            <a href="tel:01027113641" class="contact-text contact-link">010-2711-3641</a>
             <div class="contact-actions">
-              <a href="tel:01027113641" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-2711-3641')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">어머니</span><span class="relation-name"></span>
-            <span class="contact-text">010-4713-3158</span>
+            <a href="tel:01047133158" class="contact-text contact-link">010-4713-3158</a>
             <div class="contact-actions">
-              <a href="tel:01047133158" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-4713-3158')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -285,25 +293,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">david.l@sweatch.ai</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=david.l@sweatch.ai" target="_blank" rel="noopener" class="contact-text contact-link">david.l@sweatch.ai</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=david.l@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('david.l@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-9927-5727</span>
+            <a href="tel:01099275727" class="contact-text contact-link">010-9927-5727</a>
             <div class="contact-actions">
-              <a href="tel:01099275727" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-9927-5727')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">형</span><span class="relation-name"></span>
-            <span class="contact-text">010-8915-5727</span>
+            <a href="tel:01089155727" class="contact-text contact-link">010-8915-5727</a>
             <div class="contact-actions">
-              <a href="tel:01089155727" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-8915-5727')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -318,25 +323,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">chaechae.j@sweatch.ai</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=chaechae.j@sweatch.ai" target="_blank" rel="noopener" class="contact-text contact-link">chaechae.j@sweatch.ai</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=chaechae.j@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('chaechae.j@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-7931-8142</span>
+            <a href="tel:01079318142" class="contact-text contact-link">010-7931-8142</a>
             <div class="contact-actions">
-              <a href="tel:01079318142" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-7931-8142')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">아버지</span><span class="relation-name"></span>
-            <span class="contact-text">010-4008-3250</span>
+            <a href="tel:01040083250" class="contact-text contact-link">010-4008-3250</a>
             <div class="contact-actions">
-              <a href="tel:01040083250" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-4008-3250')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -351,25 +353,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">ethan.j@sweatch.ai</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=ethan.j@sweatch.ai" target="_blank" rel="noopener" class="contact-text contact-link">ethan.j@sweatch.ai</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=ethan.j@sweatch.ai" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('ethan.j@sweatch.ai')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-4709-9380</span>
+            <a href="tel:01047099380" class="contact-text contact-link">010-4709-9380</a>
             <div class="contact-actions">
-              <a href="tel:01047099380" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-4709-9380')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">배우자</span><span class="relation-name"></span>
-            <span class="contact-text">010-4718-9380</span>
+            <a href="tel:01047189380" class="contact-text contact-link">010-4718-9380</a>
             <div class="contact-actions">
-              <a href="tel:01047189380" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-4718-9380')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -398,25 +397,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">jua.k@antuan.co.kr</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=jua.k@antuan.co.kr" target="_blank" rel="noopener" class="contact-text contact-link">jua.k@antuan.co.kr</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=jua.k@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('jua.k@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-5117-8458</span>
+            <a href="tel:01051178458" class="contact-text contact-link">010-5117-8458</a>
             <div class="contact-actions">
-              <a href="tel:01051178458" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-5117-8458')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">언니</span><span class="relation-name"></span>
-            <span class="contact-text">010-2521-8821</span>
+            <a href="tel:01025218821" class="contact-text contact-link">010-2521-8821</a>
             <div class="contact-actions">
-              <a href="tel:01025218821" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-2521-8821')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -431,25 +427,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">judy.p@antuan.co.kr</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=judy.p@antuan.co.kr" target="_blank" rel="noopener" class="contact-text contact-link">judy.p@antuan.co.kr</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=judy.p@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('judy.p@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-5730-7096</span>
+            <a href="tel:01057307096" class="contact-text contact-link">010-5730-7096</a>
             <div class="contact-actions">
-              <a href="tel:01057307096" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-5730-7096')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">남자친구</span><span class="relation-name"></span>
-            <span class="contact-text">010-2232-2949</span>
+            <a href="tel:01022322949" class="contact-text contact-link">010-2232-2949</a>
             <div class="contact-actions">
-              <a href="tel:01022322949" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-2232-2949')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -464,25 +457,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">kelly.s@antuan.co.kr</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=kelly.s@antuan.co.kr" target="_blank" rel="noopener" class="contact-text contact-link">kelly.s@antuan.co.kr</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=kelly.s@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('kelly.s@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-5505-6193</span>
+            <a href="tel:01055056193" class="contact-text contact-link">010-5505-6193</a>
             <div class="contact-actions">
-              <a href="tel:01055056193" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-5505-6193')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">배우자</span><span class="relation-name">이승우</span>
-            <span class="contact-text">010-2643-8736</span>
+            <a href="tel:01026438736" class="contact-text contact-link">010-2643-8736</a>
             <div class="contact-actions">
-              <a href="tel:01026438736" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-2643-8736')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -497,25 +487,22 @@
         <div class="contact-rows">
           <div class="contact-row">
             <span class="relation-tag">이메일</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">blair.h@antuan.co.kr</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=blair.h@antuan.co.kr" target="_blank" rel="noopener" class="contact-text contact-link">blair.h@antuan.co.kr</a>
             <div class="contact-actions">
-              <a href="https://mail.google.com/mail/?view=cm&amp;to=blair.h@antuan.co.kr" target="_blank" rel="noopener" class="icon-btn email-btn" title="메일 보내기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg></a>
               <button class="icon-btn" onclick="copyText('blair.h@antuan.co.kr')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-5631-7304</span>
+            <a href="tel:01056317304" class="contact-text contact-link">010-5631-7304</a>
             <div class="contact-actions">
-              <a href="tel:01056317304" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-5631-7304')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
             <span class="relation-tag">남자친구</span><span class="relation-name">손병권</span>
-            <span class="contact-text">010-7444-2767</span>
+            <a href="tel:01074442767" class="contact-text contact-link">010-7444-2767</a>
             <div class="contact-actions">
-              <a href="tel:01074442767" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
               <button class="icon-btn" onclick="copyText('010-7444-2767')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
@@ -533,13 +520,58 @@
 
 <div class="toast-container"><div class="toast" id="toast">복사되었습니다</div></div>
 
+<div class="share-overlay" id="shareOverlay" onclick="closeSharePopup()"></div>
+<div class="share-popup" id="sharePopup">
+  <div class="share-popup-handle"></div>
+  <div class="share-popup-text" id="sharePopupText"></div>
+  <div class="share-popup-actions">
+    <button class="share-action-btn" onclick="doCopy()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      <span>복사</span>
+    </button>
+    <button class="share-action-btn" onclick="doShare()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      <span>공유하기</span>
+    </button>
+  </div>
+</div>
+
 <script>
 function toggleGroup(id) { document.getElementById(id).classList.toggle('collapsed'); }
 
 function copyText(text) {
+  var popup = document.getElementById('sharePopup');
+  var overlay = document.getElementById('shareOverlay');
+  document.getElementById('sharePopupText').textContent = text;
+  popup.dataset.text = text;
+  overlay.classList.add('show');
+  requestAnimationFrame(function() { popup.classList.add('show'); });
+}
+
+function closeSharePopup() {
+  var popup = document.getElementById('sharePopup');
+  var overlay = document.getElementById('shareOverlay');
+  popup.classList.remove('show');
+  setTimeout(function() { overlay.classList.remove('show'); }, 300);
+}
+
+function doCopy() {
+  var text = document.getElementById('sharePopup').dataset.text;
+  closeSharePopup();
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function() { showToast('복사되었습니다'); }).catch(function() { fallbackCopy(text); });
   } else { fallbackCopy(text); }
+}
+
+function doShare() {
+  var text = document.getElementById('sharePopup').dataset.text;
+  closeSharePopup();
+  if (navigator.share) {
+    navigator.share({ text: text }).catch(function() {});
+  } else {
+    fallbackCopy(text);
+    showToast('공유하기를 지원하지 않는 환경입니다. 복사되었습니다.');
+  }
 }
 
 function fallbackCopy(text) {

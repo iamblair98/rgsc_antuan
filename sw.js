@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rgsc-antuan-v1';
+const CACHE_NAME = 'rgsc-antuan-v2';
 const ASSETS = [
   './',
   './index.html',

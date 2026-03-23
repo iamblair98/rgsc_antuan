@@ -178,7 +178,7 @@
     </div>
     <div class="group-body">
 
-      <div class="person-card" data-search="김종현 henry jonghyeon.k@sweatch.ai 010-8410-7798 010-8410-7798">
+      <div class="person-card" data-search="김종현 henry jonghyeon.k@sweatch.ai 010-2493-7798 010-8410-7798">
         <div class="person-main">
           <div class="person-avatar rgsc">종현</div>
           <div class="person-info"><div class="person-name">김종현</div><div class="person-eng">Henry</div></div>
@@ -194,10 +194,10 @@
           </div>
           <div class="contact-row">
             <span class="relation-tag">본인</span><span class="relation-name-placeholder"></span>
-            <span class="contact-text">010-8410-7798</span>
+            <span class="contact-text">010-2493-7798</span>
             <div class="contact-actions">
-              <a href="tel:01084107798" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
-              <button class="icon-btn" onclick="copyText('010-8410-7798')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              <a href="tel:01024937798" class="icon-btn" title="전화걸기"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></a>
+              <button class="icon-btn" onclick="copyText('010-2493-7798')" title="복사"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
             </div>
           </div>
           <div class="contact-row">
@@ -570,7 +570,6 @@ function activateSearch() {
   badge.classList.add('active');
   var input = document.getElementById('searchInput');
   setTimeout(function() { input.focus(); }, 350);
-  // Expand all groups when searching
   document.querySelectorAll('.group.collapsed').forEach(function(g) { g.classList.remove('collapsed'); });
 }
 
@@ -580,75 +579,14 @@ function deactivateSearch(e) {
   var input = document.getElementById('searchInput');
   input.value = '';
   badge.classList.remove('active');
-  document.getElementById('searchCount').classList.remove('visible');
-  // Show all cards
+  // Reset everything
   document.querySelectorAll('.person-card').forEach(function(c) { c.classList.remove('search-hidden'); });
+  document.querySelectorAll('.group').forEach(function(g) { g.classList.remove('search-hidden-group'); });
   document.querySelectorAll('.no-result').forEach(function(n) { n.classList.remove('visible'); });
-}
-
-function doSearch(query) {
-  var q = query.trim().toLowerCase();
-  var cards = document.querySelectorAll('.person-card');
-  var totalVisible = 0;
-
-  if (!q) {
-    cards.forEach(function(c) { c.classList.remove('search-hidden'); });
-    document.getElementById('searchCount').classList.remove('visible');
-    document.querySelectorAll('.no-result').forEach(function(n) { n.classList.remove('visible'); });
-    return;
-  }
-
-  cards.forEach(function(card) {
-    var name = (card.querySelector('.person-name') || {}).textContent || '';
-    var eng = (card.querySelector('.person-eng') || {}).textContent || '';
-    var texts = card.querySelectorAll('.contact-text');
-    var allText = name.toLowerCase() + ' ' + eng.toLowerCase();
-    texts.forEach(function(t) { allText += ' ' + t.textContent.toLowerCase(); });
-    // Also search relation names
-    var relNames = card.querySelectorAll('.relation-name');
-    relNames.forEach(function(r) { allText += ' ' + r.textContent.toLowerCase(); });
-
-    if (allText.indexOf(q) !== -1) {
-      card.classList.remove('search-hidden');
-      totalVisible++;
-    } else {
-      card.classList.add('search-hidden');
-    }
-  });
-
-  // Show/hide no-result messages per group
-  document.querySelectorAll('.group').forEach(function(group) {
-    var visibleInGroup = group.querySelectorAll('.person-card:not(.search-hidden)').length;
-    var noResult = group.querySelector('.no-result');
-    if (noResult) {
-      if (visibleInGroup === 0) { noResult.classList.add('visible'); }
-      else { noResult.classList.remove('visible'); }
-    }
-    // Auto-expand groups during search
-    group.classList.remove('collapsed');
-  });
-
+  var noResult = document.getElementById('noResult');
+  if (noResult) noResult.classList.remove('show');
   var countEl = document.getElementById('searchCount');
-  countEl.textContent = '검색 결과 ' + totalVisible + '명';
-  countEl.classList.add('visible');
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() { navigator.serviceWorker.register('./sw.js'); });
-}
-
-function openSearch() {
-  document.getElementById('searchBar').style.display = 'none';
-  var wrap = document.getElementById('searchWrap');
-  wrap.classList.add('active');
-  document.getElementById('searchInput').focus();
-}
-
-function closeSearch() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('searchWrap').classList.remove('active');
-  document.getElementById('searchBar').style.display = '';
-  doSearch('');
+  if (countEl) countEl.classList.remove('visible');
 }
 
 function doSearch(query) {
@@ -657,9 +595,21 @@ function doSearch(query) {
   var groupVisible = { 'group-rgsc': 0, 'group-antuan': 0 };
   var totalVisible = 0;
 
+  if (!q) {
+    cards.forEach(function(c) { c.classList.remove('search-hidden'); });
+    ['group-rgsc', 'group-antuan'].forEach(function(gid) {
+      document.getElementById(gid).classList.remove('search-hidden-group');
+    });
+    var noResult = document.getElementById('noResult');
+    if (noResult) noResult.classList.remove('show');
+    var countEl = document.getElementById('searchCount');
+    if (countEl) countEl.classList.remove('visible');
+    return;
+  }
+
   cards.forEach(function(card) {
     var data = card.getAttribute('data-search').replace(/[\s-]/g, '');
-    if (!q || data.indexOf(q) !== -1) {
+    if (data.indexOf(q) !== -1) {
       card.classList.remove('search-hidden');
       totalVisible++;
       var group = card.closest('.group');
@@ -669,12 +619,9 @@ function doSearch(query) {
     }
   });
 
-  // Show/hide groups
   ['group-rgsc', 'group-antuan'].forEach(function(gid) {
     var g = document.getElementById(gid);
-    if (!q) {
-      g.classList.remove('search-hidden-group');
-    } else if (groupVisible[gid] > 0) {
+    if (groupVisible[gid] > 0) {
       g.classList.remove('search-hidden-group');
       g.classList.remove('collapsed');
     } else {
@@ -682,13 +629,21 @@ function doSearch(query) {
     }
   });
 
-  // No result message
   var noResult = document.getElementById('noResult');
-  if (q && totalVisible === 0) {
-    noResult.classList.add('show');
-  } else {
-    noResult.classList.remove('show');
+  if (noResult) {
+    if (totalVisible === 0) { noResult.classList.add('show'); }
+    else { noResult.classList.remove('show'); }
   }
+
+  var countEl = document.getElementById('searchCount');
+  if (countEl) {
+    countEl.textContent = '\uAC80\uC0C9 \uACB0\uACFC ' + totalVisible + '\uBA85';
+    countEl.classList.add('visible');
+  }
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() { navigator.serviceWorker.register('./sw.js'); });
 }
 </script>
 </body>
